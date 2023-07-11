@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  www:
+    container_name: www
+    image: docker/welcome-to-docker
+    ports:
+      - "8088:80"
+
+  ubuntu:
+    container_name: ubuntu
+    image: bosagora/agora-cl-builder:v6.1.0
+    stdin_open: true
+    tty: true
+
