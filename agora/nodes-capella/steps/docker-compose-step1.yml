@@ -544,6 +544,92 @@ services:
       - clboot
       - node8-1-el
 
+  node9-1-el:
+    container_name: node9-1-el
+    image: bosagora/agora-el-node:v1.0.2
+    restart: always
+    volumes:
+      - ../chain/node9/el:/data
+      - ../config/el:/config
+    command:
+      --config=/config/config.toml
+      --datadir=/data
+      --syncmode=full
+    networks:
+      bosagora_network:
+        ipv4_address: 172.200.0.56
+    depends_on:
+      - elboot
+      - node8-1-el
+
+  node9-2-cl:
+    platform: linux/amd64
+    container_name: node9-2-cl
+    image: bosagora/agora-cl-node:v1.0.3
+    volumes:
+      - ../chain/node9/cl:/cl
+      - ../chain/node9/el:/el
+      - ../config/cl:/config
+    restart: always
+    command:
+      --chain-config-file=/config/chain-config-bellatrix.yaml
+      --config-file=/config/config.yaml
+      --datadir=/cl
+      --execution-endpoint=/el/geth.ipc
+      --contract-deployment-block=8
+      --accept-terms-of-use
+      --subscribe-all-subnets=true
+      --disable-peer-scorer=true
+    networks:
+      bosagora_network:
+        ipv4_address: 172.200.0.57
+    depends_on:
+      - clboot
+      - node9-1-el
+
+  node10-1-el:
+    container_name: node10-1-el
+    image: bosagora/agora-el-node:v1.0.2
+    restart: always
+    volumes:
+      - ../chain/node10/el:/data
+      - ../config/el:/config
+    command:
+      --config=/config/config.toml
+      --datadir=/data
+      --syncmode=full
+    networks:
+      bosagora_network:
+        ipv4_address: 172.200.0.66
+    depends_on:
+      - elboot
+      - node9-1-el
+
+  node10-2-cl:
+    platform: linux/amd64
+    container_name: node10-2-cl
+    image: bosagora/agora-cl-node:v1.0.3
+    volumes:
+      - ../chain/node10/cl:/cl
+      - ../chain/node10/el:/el
+      - ../config/cl:/config
+    restart: always
+    command:
+      --chain-config-file=/config/chain-config-bellatrix.yaml
+      --config-file=/config/config.yaml
+      --datadir=/cl
+      --execution-endpoint=/el/geth.ipc
+      --contract-deployment-block=8
+      --accept-terms-of-use
+      --subscribe-all-subnets=true
+      --disable-peer-scorer=true
+    networks:
+      bosagora_network:
+        ipv4_address: 172.200.0.67
+    depends_on:
+      - clboot
+      - node10-1-el
+
 networks:
   bosagora_network:
     driver: bridge

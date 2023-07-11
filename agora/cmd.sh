@@ -91,6 +91,14 @@ if [ "$1" = "init" ]; then
     mkdir -p "$agora_root"/chain/node8/el
     mkdir -p "$agora_root"/chain/node8/cl
 
+    mkdir -p "$agora_root"/chain/node9
+    mkdir -p "$agora_root"/chain/node9/el
+    mkdir -p "$agora_root"/chain/node9/cl
+
+    mkdir -p "$agora_root"/chain/node10
+    mkdir -p "$agora_root"/chain/node10/el
+    mkdir -p "$agora_root"/chain/node10/cl
+
     cp -rf "$agora_root"/config/el/template/node1/* "$agora_root"/chain/node1/el
     cp -rf "$agora_root"/config/el/template/node2/* "$agora_root"/chain/node2/el
     cp -rf "$agora_root"/config/el/template/node3/* "$agora_root"/chain/node3/el
@@ -105,6 +113,8 @@ if [ "$1" = "init" ]; then
     docker run -it -v "$agora_root"/chain/node6/el:/data -v "$agora_root"/config/el:/config --name el-node --rm bosagora/agora-el-node:v1.0.2 --datadir=/data init /config/genesis-merge.json
     docker run -it -v "$agora_root"/chain/node7/el:/data -v "$agora_root"/config/el:/config --name el-node --rm bosagora/agora-el-node:v1.0.2 --datadir=/data init /config/genesis-merge.json
     docker run -it -v "$agora_root"/chain/node8/el:/data -v "$agora_root"/config/el:/config --name el-node --rm bosagora/agora-el-node:v1.0.2 --datadir=/data init /config/genesis-merge.json
+    docker run -it -v "$agora_root"/chain/node9/el:/data -v "$agora_root"/config/el:/config --name el-node --rm bosagora/agora-el-node:v1.0.2 --datadir=/data init /config/genesis-merge.json
+    docker run -it -v "$agora_root"/chain/node10/el:/data -v "$agora_root"/config/el:/config --name el-node --rm bosagora/agora-el-node:v1.0.2 --datadir=/data init /config/genesis-merge.json
 
 elif [ "$1" = "start" ]; then
 
